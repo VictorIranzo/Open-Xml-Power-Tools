@@ -80,6 +80,9 @@ namespace OpenXmlPowerTools.Application
                         new XAttribute("Id", nodeName)));
                 sources.Add(new Source(referencedDocResolved) { KeepSections = true, InsertId = nodeName });
             }
+
+            if (sources.Count < 2) return document;
+             
             wordProcessingDoc.MainDocumentPart.PutXDocument();
             document.DocumentByteArray = memoryStreamTemplate.ToArray();
 
