@@ -52,7 +52,7 @@ namespace OpenXmlPowerTools.Application
             // Go through all headers looking for links. Normally, it's not necessary as it's in the first header.
             foreach (HeaderPart header in headers)
             {
-                XElement linkInHeader = header.GetXDocument().Descendants(W.t).FirstOrDefault(wt => wt.Value.Contains("<# link"));
+                XElement linkInHeader = header.GetXDocument().Descendants(W.p).FirstOrDefault(wt => wt.Value.Contains("<# link"));
                 if (linkInHeader != null) {
                     sources.Add(new Source(GetReferencedDocument(linkInHeader)) { KeepSections = true });
                     
@@ -64,7 +64,7 @@ namespace OpenXmlPowerTools.Application
 
             // Find all subreports links in the body.
             XDocument body = wordProcessingDoc.MainDocumentPart.GetXDocument();
-            List<XElement> linksInBody = body.Descendants(W.t).Where(e=> e.Value.Contains("<# link")).ToList();
+            List<XElement> linksInBody = body.Descendants(W.p).Where(wp=> wp.Value.Contains("<# link")).ToList();
             int i = 0;
 
             foreach (XElement link in linksInBody)
@@ -78,7 +78,7 @@ namespace OpenXmlPowerTools.Application
                 // at the template the subreport.
                 link.ReplaceWith(new XElement(PtOpenXml.Insert,
                         new XAttribute("Id", nodeName)));
-                sources.Add(new Source(referencedDocResolved) { KeepSections = true, InsertId = nodeName });
+                sources.Add(new Source(referencedDocResolved) { KeepSections = false, InsertId = nodeName });
             }
 
             if (sources.Count < 2) return document;
