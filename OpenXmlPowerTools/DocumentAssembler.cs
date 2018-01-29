@@ -807,12 +807,22 @@ namespace OpenXmlPowerTools
             var headerPart = part as HeaderPart;
             if (headerPart != null)
             {
-                var imageId = headerPart.Parts
-                    .Select(p => Regex.Match(p.RelationshipId, @"rId(?<rId>\d+)").Groups["rId"].Value)
-                    .Max(x => Convert.ToDecimal(x));
+                    var imageId = headerPart.Parts
+                        .Select(p => Regex.Match(p.RelationshipId, @"rId(?<rId>\d+)").Groups["rId"].Value).Max();
 
-                return string.Format("rId{0}", ++imageId);
+                int numero;
+                if (int.TryParse(imageId, out numero))
+                {
+                    return string.Format("rId{0}", ++numero);
+                }
+                else {
+                    string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                    string IdImage = headerPart.Parts
+                       .Select(p => p.RelationshipId).FirstOrDefault();
+                    return IdImage + chars[new Random().Next(0, chars.Length - 1)];
+                }
             }
+                
 
             var footerPart = part as FooterPart;
             if (footerPart != null)

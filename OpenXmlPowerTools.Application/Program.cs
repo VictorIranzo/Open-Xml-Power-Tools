@@ -23,6 +23,7 @@ namespace OpenXmlPowerTools.Application
 
             WmlDocument resolvedDocument = ResolveDocument(template);
             resolvedDocument.SaveAs("../../MacroTemplate.docx");
+            //WmlDocument resolvedDocument = new WmlDocument("../../MacroTemplate.docx");
 
             // Fills the template with the XML data.
             bool error;
