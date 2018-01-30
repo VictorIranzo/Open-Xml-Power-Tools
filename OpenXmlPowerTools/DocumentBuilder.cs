@@ -556,7 +556,7 @@ namespace OpenXmlPowerTools
                                 var hpXDoc = fp.GetXDocument();
                                 return hpXDoc.Descendants(PtOpenXml.Insert).Any(d => (string)d.Attribute(PtOpenXml.Id) == source.InsertId);
                             }))
-                                foundInHeadersFooters = true;
+                            foundInHeadersFooters = true;
 
                             if (foundInHeadersFooters)
                             {
@@ -2001,7 +2001,7 @@ namespace OpenXmlPowerTools
                     ExternalRelationship newEr = newContentPart.AddExternalRelationship(er.RelationshipType, er.Uri);
                     imageReference.Attribute(R.id).Value = newEr.Id;
                 }
-                throw new DocumentBuilderInternalException("Source {0} is unsupported document - contains reference to NULL image");
+                //throw new DocumentBuilderInternalException("Source {0} is unsupported document - contains reference to NULL image");
             }
         }
 

@@ -2,6 +2,7 @@
 namespace OpenXmlPowerTools.Application
 {
     using DocumentFormat.OpenXml.Packaging;
+    using DocumentFormat.OpenXml.Wordprocessing;
     using System;
     using System.Collections.Generic;
     using System.IO;
@@ -19,7 +20,7 @@ namespace OpenXmlPowerTools.Application
         public static void Main()
         {
             // Read the template to be generated.
-            WmlDocument template = new WmlDocument("../../Template.docx");
+            WmlDocument template = new WmlDocument("../../Template_Body.docx");
 
             WmlDocument resolvedDocument = ResolveDocument(template);
             resolvedDocument.SaveAs("../../MacroTemplate.docx");
@@ -44,8 +45,11 @@ namespace OpenXmlPowerTools.Application
 
             WordprocessingDocument wordProcessingDoc = WordprocessingDocument.Open(memoryStreamTemplate, true);
 
+            // No se descarta el header y footer ya que si se hace, luego el documento parece como si no tuviera header y footer.
+            // Quizás si se cambia el orden en que se insertan las sources (haciendo primero la del header y luego la de template) se puede
+            // hacer para poder descartar header y footer de template.
             // Add the document passed as a parameter discarding its header and footer.
-            sources.Add(new Source(document) { KeepSections = true, DiscardHeadersAndFootersInKeptSections = true});
+            sources.Add(new Source(document) { KeepSections = true});
 
             // Find header and footer
             List<HeaderPart> headers = wordProcessingDoc.MainDocumentPart.HeaderParts.ToList();
@@ -55,8 +59,24 @@ namespace OpenXmlPowerTools.Application
             {
                 XElement linkInHeader = header.GetXDocument().Descendants(W.p).FirstOrDefault(wt => wt.Value.Contains("<# link"));
                 if (linkInHeader != null) {
-                    sources.Add(new Source(GetReferencedDocument(linkInHeader)) { KeepSections = true });
+
+                    // Gets the referenced document and resolve it recursively.
+                    WmlDocument referencedDocResolved = ResolveDocument(GetReferencedDocument(linkInHeader));
+                    string nodeName = "Header";
+
+                    // Replaces the link by a node with a identifier and adds the subreport as a source. 
+                    // The DocumentBuilder will recognize this identifier and will insert in its position 
+                    // at the template the subreport.
+                    XElement insertNode = new XElement(PtOpenXml.Insert, new XAttribute("Id", nodeName));
+                    //Paragraph parrafo = new Paragraph();
+                    linkInHeader.ReplaceWith(insertNode);
                     
+                    // Funciona tanto con keepSections a true como false.
+                    sources.Add(new Source(referencedDocResolved) { KeepSections = true, InsertId = nodeName });
+
+                    // Guarda el header modificado.
+                    header.PutXDocument();
+
                     break;
                 }
             }
@@ -86,6 +106,11 @@ namespace OpenXmlPowerTools.Application
              
             wordProcessingDoc.MainDocumentPart.PutXDocument();
             document.DocumentByteArray = memoryStreamTemplate.ToArray();
+
+            WordprocessingDocument wordProcessingDoc2 = WordprocessingDocument.Open(memoryStreamTemplate, true);
+            HeaderPart header2 = wordProcessingDoc2.MainDocumentPart.HeaderParts.FirstOrDefault();
+
+            document.SaveAs("../../Links_Reemplazados.docx");
 
             // Return the document with all its subreports incorpored.
             return DocumentBuilder.BuildDocument(sources);
