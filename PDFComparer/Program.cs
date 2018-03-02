@@ -14,7 +14,31 @@ namespace PDFComparer
             string path1 = @"D:\INFORMATICA\ADD\Open-Xml-PowerTools\FilesPDF\ISO+9126-4 - copia.pdf";
             string path2 = @"D:\INFORMATICA\ADD\Open-Xml-PowerTools\FilesPDF\ISO+9126-4.pdf";
             string path3 = @"D:\INFORMATICA\ADD\Open-Xml-PowerTools\FilesPDF\SusEntradas.pdf";
-            CompareTwoPDF(path3,path1);
+            string path4 = @"D:\INFORMATICA\ADD\Open-Xml-PowerTools\FilesPDF\myISO.pdf";
+
+            //CompareTwoPDF(path1,path4);
+            //PDFClownComparer.Compare();
+            string book1 = PDFSyncfusion.ExtractSync(path1);
+            string book2 = PDFSyncfusion.ExtractSync(path4);
+
+            bool b = book1.Equals(book2);
+
+            //CompareByteArraysPDF(path1, path4);
+        }
+
+        private static void CompareByteArraysPDF(string path1, string path2)
+        {
+            byte[] pdf1= File.ReadAllBytes(path1);
+            byte[] pdf2 = File.ReadAllBytes(path2);
+            if (pdf1.Length == pdf2.Length) {
+                for (int i = 0; i < pdf1.Length; i++) {
+                    bool c = pdf1[i].Equals(pdf2[i]);
+                    if (!c) {
+                        Console.WriteLine(i);
+                    }
+                }
+            }
+            bool b = pdf1.Equals(pdf2);
         }
 
         static string FirstFile, SecondFile;
