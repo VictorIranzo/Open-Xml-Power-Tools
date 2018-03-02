@@ -21,7 +21,12 @@ namespace PDFComparer
 
                 //Extract text from first page.
                 extractedText += page.ExtractText();
-
+                if (extractedText.Contains("Product"))
+                {
+                    int indexStart = extractedText.IndexOf("Product");
+                    int indexEnd = extractedText.IndexOf("\n",indexStart);
+                    extractedText = extractedText.Remove(indexStart, indexEnd-indexStart);
+                }
                 //Close the document
             }
             loadedDocument.Close(true);
