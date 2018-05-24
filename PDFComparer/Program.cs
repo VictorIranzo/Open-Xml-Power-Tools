@@ -11,17 +11,15 @@ namespace PDFComparer
     {
         static void Main(string[] args)
         {
-            string path1 = @"D:\INFORMATICA\ADD\Open-Xml-PowerTools\FilesPDF\ISO+9126-4 - copia.pdf";
-            string path2 = @"D:\INFORMATICA\ADD\Open-Xml-PowerTools\FilesPDF\ISO+9126-4.pdf";
-            string path3 = @"D:\INFORMATICA\ADD\Open-Xml-PowerTools\FilesPDF\SusEntradas.pdf";
-            string path4 = @"D:\INFORMATICA\ADD\Open-Xml-PowerTools\FilesPDF\myISO.pdf";
+            string path1 = "./Files/Report_v1.pdf";
+            string path2 = "./Files/Report_v2.pdf";
+            string path3 = "./Files/Report_v3.pdf";
+            string path4 = "./Files/Report_v4.pdf";
+            string path5 = "./Files/Report_v5.pdf";
 
             //CompareTwoPDF(path1,path4);
             //PDFClownComparer.Compare();
-            string book1 = PDFSyncfusion.ExtractSync(path1);
-            string book2 = PDFSyncfusion.ExtractSync(path4);
-
-            bool b = book1.Equals(book2);
+            PDFSyncfusion.ComparePDFs(path1, path5);
 
             //CompareByteArraysPDF(path1, path4);
         }

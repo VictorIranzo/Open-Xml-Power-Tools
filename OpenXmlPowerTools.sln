@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenXmlPowerTools", "OpenXmlPowerTools\OpenXmlPowerTools.csproj", "{6F957FF3-AFCC-4D69-8FBC-71AE21BC45C9}"
 EndProject
@@ -17,6 +17,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSON.Application", "JSON.Application\JSON.Application.csproj", "{55890B6C-5C88-4744-B021-DE207A163E1A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFComparer", "PDFComparer\PDFComparer.csproj", "{A9CFFD36-7A50-4695-A400-61BA9FFF7D66}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChartUpdater-Application", "ChartUpdater-Application\ChartUpdater-Application.csproj", "{A379350C-03DB-4DED-8550-5A45B5931350}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocxToPdf", "DocxToPdf\DocxToPdf.csproj", "{A2E77074-4205-4BCD-9604-AE6D0C0409E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConvertPDF.App", "ConvertPDF.App\ConvertPDF.App.csproj", "{17AB020A-F1C9-438E-AB70-213804B22BCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,8 +50,23 @@ Global
 		{A9CFFD36-7A50-4695-A400-61BA9FFF7D66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9CFFD36-7A50-4695-A400-61BA9FFF7D66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9CFFD36-7A50-4695-A400-61BA9FFF7D66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A379350C-03DB-4DED-8550-5A45B5931350}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A379350C-03DB-4DED-8550-5A45B5931350}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A379350C-03DB-4DED-8550-5A45B5931350}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A379350C-03DB-4DED-8550-5A45B5931350}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2E77074-4205-4BCD-9604-AE6D0C0409E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2E77074-4205-4BCD-9604-AE6D0C0409E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2E77074-4205-4BCD-9604-AE6D0C0409E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2E77074-4205-4BCD-9604-AE6D0C0409E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17AB020A-F1C9-438E-AB70-213804B22BCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17AB020A-F1C9-438E-AB70-213804B22BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17AB020A-F1C9-438E-AB70-213804B22BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17AB020A-F1C9-438E-AB70-213804B22BCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D8EA2E78-47A5-41C5-A05E-9F3705165022}
 	EndGlobalSection
 EndGlobal
